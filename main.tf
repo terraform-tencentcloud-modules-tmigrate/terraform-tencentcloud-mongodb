@@ -63,6 +63,17 @@ resource "tencentcloud_mongodb_instance_backup_rule" "backup_rule" {
   depends_on = [tencentcloud_mongodb_instance.mongodb]
 }
 
+# SSL network transit encryption (separate resource, managed independently)
+# When this resource is destroyed, SSL is automatically disabled on the instance.
+resource "tencentcloud_mongodb_instance_ssl" "ssl" {
+  count = var.set_mongodb_ssl ? 1 : 0
+
+  instance_id = local.create_mongodb_instance ? tencentcloud_mongodb_instance.mongodb[0].id : var.mongodb_instance_id
+  enable      = true
+
+  depends_on = [tencentcloud_mongodb_instance.mongodb]
+}
+
 ################################################################################
 # Mongodb Instance Account
 ################################################################################

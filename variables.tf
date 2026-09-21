@@ -218,6 +218,17 @@ variable "backup_rule_notify" {
   default     = false
 }
 
+# ---------------------------------------------------------------------------
+# SSL network encryption (tencentcloud_mongodb_instance_ssl)
+# Enable SSL for client-to-mongodb network transit encryption.
+# ---------------------------------------------------------------------------
+
+variable "set_mongodb_ssl" {
+  description = "Set to true to enable SSL on the instance (creates tencentcloud_mongodb_instance_ssl resource). When the resource is destroyed, SSL is automatically disabled."
+  type        = bool
+  default     = false
+}
+
 # mongodb account
 variable "create_mongodb_account" {
   description = "Controls if Mongodb account should be created."
