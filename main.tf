@@ -47,6 +47,22 @@ resource "tencentcloud_mongodb_instance_backup" "instance_backup" {
   backup_remark = var.backup_remark
 }
 
+# Periodic automatic backup rule (with retention period, daily frequency, etc.)
+# Only created when set_mongodb_backup_rule = true
+resource "tencentcloud_mongodb_instance_backup_rule" "backup_rule" {
+  count = var.set_mongodb_backup_rule ? 1 : 0
+
+  instance_id             = local.create_mongodb_instance ? tencentcloud_mongodb_instance.mongodb[0].id : var.mongodb_instance_id
+  backup_method           = var.backup_rule_method
+  backup_time             = var.backup_rule_time
+  backup_retention_period = var.backup_rule_retention_period
+  backup_frequency        = var.backup_rule_frequency
+  active_weekdays         = var.backup_rule_active_weekdays
+  notify                  = var.backup_rule_notify
+
+  depends_on = [tencentcloud_mongodb_instance.mongodb]
+}
+
 ################################################################################
 # Mongodb Instance Account
 ################################################################################

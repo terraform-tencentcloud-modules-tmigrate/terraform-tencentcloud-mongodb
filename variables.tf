@@ -169,6 +169,55 @@ variable "backup_remark" {
   default     = null
 }
 
+# ---------------------------------------------------------------------------
+# Periodic automatic backup rule (tencentcloud_mongodb_instance_backup_rule)
+# Use these for daily/weekly scheduled backup with retention period.
+# Note: This is separate from the one-shot backup above. Set set_mongodb_backup_rule=true
+# to create a periodic backup policy with retention period and frequency.
+# ---------------------------------------------------------------------------
+
+variable "set_mongodb_backup_rule" {
+  description = "Set to true to create a periodic automatic backup rule (tencentcloud_mongodb_instance_backup_rule). This is the recommended way for daily backups with retention period."
+  type        = bool
+  default     = false
+}
+
+variable "backup_rule_method" {
+  description = "Automatic backup method. 0: logical, 1: physical, 3: snapshot (cloud disk only)."
+  type        = number
+  default     = 0
+}
+
+variable "backup_rule_time" {
+  description = "Backup start time, hour of day. Range [0, 23]. e.g. 2 means 02:00."
+  type        = number
+  default     = 2
+}
+
+variable "backup_rule_retention_period" {
+  description = "Backup retention period in days. Range [7, 365]."
+  type        = number
+  default     = 7
+}
+
+variable "backup_rule_frequency" {
+  description = "Daily backup frequency. 12: twice a day (~12h apart), 24: once a day (default)."
+  type        = number
+  default     = 24
+}
+
+variable "backup_rule_active_weekdays" {
+  description = "Weekdays to run backup. Comma-separated numbers 0-6 (0=Sunday). Default unset = daily. e.g. '1,3,5' = Mon/Wed/Fri."
+  type        = string
+  default     = null
+}
+
+variable "backup_rule_notify" {
+  description = "Whether to send alert on backup failure."
+  type        = bool
+  default     = false
+}
+
 # mongodb account
 variable "create_mongodb_account" {
   description = "Controls if Mongodb account should be created."
