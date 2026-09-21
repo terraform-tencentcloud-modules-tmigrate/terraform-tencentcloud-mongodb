@@ -218,6 +218,12 @@ variable "backup_rule_notify" {
   default     = false
 }
 
+variable "backup_rule_version" {
+  description = "Backup version. 0: old version backup, 1: advanced backup (supports long-term retention, oplog backup). New instances (MongoDB 5.0+) default to advanced backup on the API side, so setting 0 will fail with 'can not reduce version'. Default to 1 to match new instances."
+  type        = number
+  default     = 1
+}
+
 # ---------------------------------------------------------------------------
 # SSL network encryption (tencentcloud_mongodb_instance_ssl)
 # Enable SSL for client-to-mongodb network transit encryption.

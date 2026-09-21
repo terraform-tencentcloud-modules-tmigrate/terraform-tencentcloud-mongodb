@@ -59,6 +59,7 @@ resource "tencentcloud_mongodb_instance_backup_rule" "backup_rule" {
   backup_frequency        = var.backup_rule_frequency
   active_weekdays         = var.backup_rule_active_weekdays
   notify                  = var.backup_rule_notify
+  backup_version          = var.backup_rule_version
 
   depends_on = [tencentcloud_mongodb_instance.mongodb]
 }
