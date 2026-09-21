@@ -16,6 +16,11 @@ resource "tencentcloud_mongodb_instance" "mongodb" {
   machine_type           = var.mongodb_machine_type
   memory                 = var.memory
   volume                 = var.volume
+  cpu                    = var.cpu
+  data_encryption        = var.data_encryption
+  encryption_key_source  = var.encryption_key_source
+  key_id                 = var.key_id
+  kms_region             = var.kms_region
   available_zone         = var.available_zone
   availability_zone_list = var.availability_zone_list
   vpc_id                 = var.mongodb_vpc_id

@@ -35,6 +35,36 @@ variable "volume" {
   default     = 25
 }
 
+variable "cpu" {
+  description = "The CPU core count of the MongoDB instance. Unit: C. The supported CPU specifications can be obtained through the DescribeSpecInfo API. If not specified, the default CPU size of the instance is used."
+  type        = number
+  default     = null
+}
+
+variable "data_encryption" {
+  description = "Database storage encryption setting. Valid values: `No_Encryption` (no storage encryption), `TDE` (enables TDE storage encryption). This field is immutable after creation."
+  type        = string
+  default     = null
+}
+
+variable "encryption_key_source" {
+  description = "Encryption key source. This field is immutable after creation. Used together with `data_encryption = TDE`."
+  type        = string
+  default     = null
+}
+
+variable "key_id" {
+  description = "KMS key ID used for TDE storage encryption. This field is immutable after creation. Used together with `data_encryption = TDE`."
+  type        = string
+  default     = null
+}
+
+variable "kms_region" {
+  description = "KMS region for the encryption key. This field is immutable after creation. Used together with `data_encryption = TDE`."
+  type        = string
+  default     = null
+}
+
 variable "available_zone" {
   description = "The available zone of the Mongodb."
   type        = string
